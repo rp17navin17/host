@@ -1,0 +1,63 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <title>To-Do List</title> 
+  <link rel="stylesheet" href="todo-list.css"> 
+  <script>
+
+
+// Reusable function to add a close button to a list item 
+function addCloseButton(listItem) { 
+  const closeButton = document.createElement("span"); 
+  closeButton.className = "close-btn"; 
+  closeButton.innerHTML = "&times;"; 
+  listItem.appendChild(closeButton); 
+  closeButton.onclick = () => { 
+    listItem.remove(); 
+  }; 
+} 
+// Add close buttons to existing items 
+document.querySelectorAll(".todo-item").forEach((item) => { 
+  addCloseButton(item); 
+}); 
+// Toggle checked state 
+document.getElementById("todoList").addEventListener("click", function (event) { 
+  if (event.target.classList.contains("todo-item")) { 
+    event.target.classList.toggle("checked"); 
+  } 
+}); 
+// Add new item 
+function addNewTodo() { 
+  const input = document.getElementById("todoInput"); 
+  const inputValue = input.value.trim(); 
+  if (inputValue === "") { 
+    alert("You must write something!"); 
+    return; 
+  } 
+  const newItem = document.createElement("li"); 
+  newItem.className = "todo-item"; 
+  newItem.textContent = inputValue; 
+  addCloseButton(newItem); 
+  document.getElementById("todoList").appendChild(newItem); 
+  input.value = ""; 
+}
+  </script>
+</head> 
+<body> 
+  <a href="https://chatgpt.com/">chat</a>
+  <div id="todoHeader" class="todo-header"> 
+    <h2 class="todo-title">To-Do List</h2> 
+    <input type="text" id="todoInput" placeholder="Add a task..."> 
+    <span id="addTodoBtn" class="todo-add-btn" onclick="addNewTodo()">Add</span> 
+  </div> 
+ 
+  <ul id="todoList" class="todo-list"> 
+    <li class="todo-item">Assignments</li> 
+    <li class="todo-item">Observation</li> 
+    <li class="todo-item">Study for test</li> 
+    <li class="todo-item">Online Quiz</li> 
+  </ul> 
+  <script src="todo.js"></script> 
+</body> 
+</html>
